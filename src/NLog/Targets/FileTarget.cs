@@ -681,7 +681,7 @@ namespace NLog.Targets
         /// Writes the specified array of logging events to a file specified in the FileName
         /// parameter.
         /// </summary>
-        /// <param name="logEvents">An array of <see cref="LogEventInfo "/> objects.</param>
+        /// <param name="logEvents">An array of <see cref="AsyncLogEventInfo"/> objects.</param>
         /// <remarks>
         /// This function makes use of the fact that the events are batched by sorting
         /// the requests by filename. This optimizes the number of open/close calls
@@ -1970,7 +1970,6 @@ namespace NLog.Targets
             }
 
             private readonly string template;
-            private readonly string pattern;
 
             private readonly int startIndex;
             private readonly int endIndex;
@@ -1980,9 +1979,6 @@ namespace NLog.Targets
                 this.template = template;
                 this.startIndex = template.IndexOf(PatternStartCharacters, StringComparison.Ordinal);
                 this.endIndex = template.IndexOf(PatternEndCharacters, StringComparison.Ordinal) + PatternEndCharacters.Length;
-
-                this.pattern = this.HasPattern() ? template.Substring(this.startIndex, this.endIndex - this.startIndex) : String.Empty;
-
             }
 
             /// <summary>
